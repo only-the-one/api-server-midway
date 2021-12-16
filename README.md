@@ -1,7 +1,7 @@
 # my-midway-project
 
 midway - app + typeorm
- - sqlite db
+ - sqlite db ok
  - mysql db
 
 ## QuickStart
