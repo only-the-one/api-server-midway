@@ -1,5 +1,9 @@
 # my-midway-project
 
+midway - app + typeorm
+ - sqlite db
+ - mysql db
+
 ## QuickStart
 
 <!-- add docs here for user -->
