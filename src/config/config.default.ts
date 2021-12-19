@@ -23,8 +23,8 @@ export default (appInfo: EggAppInfo) => {
   // };
 
   /**
- * 单数据库实例
- */
+   * 单数据库实例
+   */
   //  const mysql = {
   //   type: 'mysql',
   //   host: '',
@@ -36,16 +36,16 @@ export default (appInfo: EggAppInfo) => {
   //   logging: false,
   // };
 
-const sqlite = {
-  type: 'sqlite',
-  database: path.join(__dirname, '../../test.sqlite'),
-  synchronize: true,
-  logging: true,
-};
+  const sqlite = {
+    type: 'sqlite',
+    database: path.join(__dirname, '../../test.sqlite'),
+    synchronize: true,
+    logging: true,
+  };
 
   /**
-  * 单数据库实例
-  */
+   * 单数据库实例
+   */
   config.orm = sqlite;
 
   return config;

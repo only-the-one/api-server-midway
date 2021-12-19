@@ -5,7 +5,7 @@ import {
   Get,
   Post,
   Put,
-  Delete,
+  Del,
   All,
   Query,
   Param,
@@ -15,8 +15,8 @@ import {
   // SetHeader,
   // ContentType,
 } from '@midwayjs/decorator';
-import { Context } from  'egg';
-import { BlogService } from '../service/blog.service'
+import { Context } from 'egg';
+import { BlogService } from '../service/blog.service';
 
 @Provide()
 @Controller('/blog')
@@ -25,36 +25,39 @@ export class Blog {
   ctx: Context;
 
   @Inject()
-  blogService: BlogService
+  blogService: BlogService;
 
   @Get('/')
   async GetHandler(@Query(ALL) query: unknown): Promise<any> {
-    return await this.blogService.Fetch(query)
+    return await this.blogService.Fetch(query);
   }
 
   @Get('/:id')
   async GetOneHandler(@Param(ALL) params: any): Promise<any> {
-    return await this.blogService.FindOne({ id: params.id})
+    return await this.blogService.FindOne({ id: params.id });
   }
 
   @Post('/')
-  async CreateHandler(@Body(ALL) body: unknown): Promise<any> {
-    return await this.blogService.Create(body)
+  async CreateHandler(@Body(ALL) body: any): Promise<any> {
+    return await this.blogService.Create(body);
   }
 
   @All('/all')
-  async AllHandler(@Query(ALL) query: unknown): Promise<any> {
-    return await this.blogService.GetAll()
+  async AllHandler(@Query(ALL) query: any): Promise<any> {
+    return await this.blogService.GetAll(query);
   }
 
   @Put('/:id')
-  async UpdateOneHandler(@Param(ALL) params: any, @Body(ALL) body: Object): Promise<any> {
-    return await this.blogService.UpdateOne({ id: params.id}, body)
+  async UpdateOneHandler(
+    @Param(ALL) params: any,
+    @Body(ALL) body: any
+  ): Promise<any> {
+    return await this.blogService.UpdateOne({ id: params.id }, body);
   }
 
-  @Delete('/:id')
+  @Del('/:id')
   async DeleteOneHandler(@Param(ALL) params: any): Promise<any> {
-    return await this.blogService.Delete({ id: params.id})
+    return await this.blogService.Delete({ id: params.id });
   }
 
   // @Get('/html')
