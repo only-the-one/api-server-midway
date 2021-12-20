@@ -19,7 +19,7 @@ import { Context } from 'egg';
 import { BlogService } from '../service/blog.service';
 
 @Provide()
-@Controller('/blog')
+@Controller('/blogs')
 export class Blog {
   @Inject()
   ctx: Context;
