@@ -1,11 +1,12 @@
 require('dotenv').config();
+// const httpsProxyAgent = require('https-proxy-agent');
 
 // eslint-disable-next-line node/no-extraneous-require
 const axios = require('axios');
 const http = axios.create({
   baseURL: process.env.API_ENDPOINT,
   timeout: 10000,
-  headers: { 'X-Custom-Header': 'foobar' },
+  // httpsAgent: new httpsProxyAgent('http://localhost:7890'),
 });
 
 // Add a response interceptor
@@ -37,7 +38,7 @@ const exchange = async function (id: string): Promise<any> {
 const currency = async function (coins: string): Promise<any> {
   const option = {
     method: 'GET',
-    url: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest',
+    url: 'v1/cryptocurrency/quotes/latest',
     params: {
       symbol: coins,
     },
@@ -57,17 +58,22 @@ const currency = async function (coins: string): Promise<any> {
 const getAllCoins = async function ({ start, limit }): Promise<any> {
   const option = {
     method: 'GET',
-    url: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/map',
+    url: 'v1/cryptocurrency/map',
     params: {
       start,
       limit,
+      sort: 'id',
     },
     headers: {
       'X-CMC_PRO_API_KEY': process.env.CMC_PRO_API_KEY,
     },
   };
-  const { status, data } = await http.request(option);
-  console.log('{ status, data }  :>> ', { status, data });
+  const { data } = await http.request(option);
+  data.map((item: any) => {
+    if (item.platform) {
+      item.platform = JSON.stringify(item.platform);
+    }
+  });
   return data;
 };
 

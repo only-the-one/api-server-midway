@@ -15,27 +15,24 @@ export default class idmapEntity extends BaseEntity {
   @Column()
   name: string;
 
-  @Column()
-  slugin: string;
-
-  @Column()
+  @Column({ nullable: true })
   symbol: string;
 
-  @Column()
+  @Column({ nullable: true })
+  slug: string;
+
+  @Column({ nullable: true })
   rank: number;
 
-  @Column()
-  platform: string;
+  @Column({ default: 0 })
+  is_active: number;
 
-  @Column()
-  is_active: boolean;
-
-  @Column()
-  amount: number;
-
-  @CreateDateColumn()
+  @CreateDateColumn({ nullable: true })
   first_historical_data: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ nullable: true })
   last_historical_data: Date;
+
+  @Column({ nullable: true })
+  platform: string;
 }
