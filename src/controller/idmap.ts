@@ -30,6 +30,11 @@ export class IdMap {
     return this.idmapService.GetAll(query);
   }
 
+  @Get('/match')
+  async GetMathed(@Query() keyword: string): Promise<string> {
+    return this.idmapService.getMatched(keyword);
+  }
+
   @Get('/fetch')
   async Fetch(@Query(ALL) query: any): Promise<any> {
     // 只需运行一次，获取所有的数据, 后期运行的时候，传递_start参数
