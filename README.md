@@ -1,5 +1,6 @@
 # my-midway-project
 
+a branch for 核酸检测
 midway - app + typeorm
  - sqlite db ok
  - mysql db
