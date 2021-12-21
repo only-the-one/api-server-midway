@@ -18,13 +18,21 @@ export default (appInfo: EggAppInfo) => {
     replaceEggLogger: true,
   };
 
+  config.security = {
+    domainWhiteList: [
+      'http://127.0.0.1:8010',
+      'http://127.0.0.1:8080',
+      'http://127.0.0.1',
+    ], //  允许跨域的域名
+  };
+
   // config.security = {
   //   csrf: false,
   // };
 
   /**
- * 单数据库实例
- */
+   * 单数据库实例
+   */
   //  const mysql = {
   //   type: 'mysql',
   //   host: '',
@@ -36,16 +44,16 @@ export default (appInfo: EggAppInfo) => {
   //   logging: false,
   // };
 
-const sqlite = {
-  type: 'sqlite',
-  database: path.join(__dirname, '../../test.sqlite'),
-  synchronize: true,
-  logging: true,
-};
+  const sqlite = {
+    type: 'sqlite',
+    database: path.join(__dirname, '../../test.sqlite'),
+    synchronize: true,
+    logging: true,
+  };
 
   /**
-  * 单数据库实例
-  */
+   * 单数据库实例
+   */
   config.orm = sqlite;
 
   return config;
