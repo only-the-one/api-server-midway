@@ -26,9 +26,9 @@ export default (appInfo: EggAppInfo) => {
     ], //  允许跨域的域名
   };
 
-  // config.security = {
-  //   csrf: false,
-  // };
+  config.security = {
+    csrf: false,
+  };
 
   /**
    * 单数据库实例
