@@ -11,9 +11,6 @@ import {
   Param,
   Body,
   ALL,
-  // HttpCode,
-  // SetHeader,
-  // ContentType,
 } from '@midwayjs/decorator';
 import { Context } from 'egg';
 import { BlogService } from '../service/blog.service';
@@ -33,12 +30,21 @@ export class Blog {
   }
 
   @Get('/getLatest')
-  async GetWaitList(
+  async GetLatest(
     @Query() id: number,
     @Query() type: string,
     @Query() day: string
   ): Promise<any> {
     return await this.blogService.GetLatest({ _id: id, type, day });
+  }
+
+  @Get('/getWaitList')
+  async GetWaitList(
+    @Query() id: number,
+    @Query() type: string,
+    @Query() day: string
+  ): Promise<any> {
+    return await this.blogService.GetWaitList({ type, day });
   }
 
   @Get('/get3Ready')

@@ -1,7 +1,7 @@
 import { Provide } from '@midwayjs/decorator';
 import { InjectEntityModel } from '@midwayjs/orm';
 import BlogEntity from '../entity/blog.entity';
-import { Repository, LessThan } from 'typeorm';
+import { Repository, LessThan, Not } from 'typeorm';
 
 @Provide()
 export class BlogService {
@@ -31,6 +31,7 @@ export class BlogService {
   async UpdateOne(query: any, option: any) {
     const blogToUpdate = await this.blogModel.findOne(query);
     Object.assign(blogToUpdate, option);
+    blogToUpdate.updateDate = new Date();
     await this.blogModel.save(blogToUpdate);
   }
 
@@ -68,6 +69,35 @@ export class BlogService {
     });
     return {
       waitAmount,
+      waitList,
+    };
+  }
+
+  async GetWaitList({ type, day }) {
+    const done = await this.blogModel.count({
+      status: 2,
+      type,
+      day,
+    });
+    const total = await this.blogModel.count({
+      status: Not(3),
+      type,
+      day,
+    });
+    const waitList = await this.blogModel.find({
+      where: {
+        status: LessThan(2),
+        type,
+        day,
+      },
+      order: {
+        id: 'ASC',
+      },
+      take: 50,
+    });
+    return {
+      done,
+      total,
       waitList,
     };
   }

@@ -8,6 +8,7 @@
     "@midwayjs/core": "^2.3.0",
     "@midwayjs/decorator": "^2.3.0",
     "@midwayjs/orm": "^2.14.0",
+    "@midwayjs/task": "^2.14.0",
     "@midwayjs/web": "^2.3.0",
     "egg": "^2.0.0",
     "egg-cors": "^2.2.3",
