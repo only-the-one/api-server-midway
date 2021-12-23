@@ -47,9 +47,13 @@ export class Blog {
     return await this.blogService.GetWaitList({ type, day });
   }
 
-  @Get('/get3Ready')
-  async Get3Ready(@Query() type: string, @Query() day: string): Promise<any> {
-    return await this.blogService.get3Ready({ type, day });
+  @Get('/getReadyList')
+  async getReadyList(
+    @Query() type: string,
+    @Query() day: string,
+    @Query() size: number
+  ): Promise<any> {
+    return await this.blogService.getReadyList({ type, day, size });
   }
 
   @Get('/:id')

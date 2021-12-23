@@ -35,8 +35,18 @@ export class BlogService {
     await this.blogModel.save(blogToUpdate);
   }
 
-  async get3Ready({ type, day }) {
-    return await this.blogModel.find({
+  async getReadyList({ type, day, size = 3 }) {
+    const done = await this.blogModel.count({
+      status: 2,
+      type,
+      day,
+    });
+    const total = await this.blogModel.count({
+      status: Not(3),
+      type,
+      day,
+    });
+    const readyList = await this.blogModel.find({
       where: {
         status: 0,
         type,
@@ -45,8 +55,14 @@ export class BlogService {
       order: {
         id: 'ASC',
       },
-      take: 3,
+      take: size,
     });
+
+    return {
+      done,
+      total,
+      readyList,
+    };
   }
 
   async GetLatest({ _id, type, day }) {
