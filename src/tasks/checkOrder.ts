@@ -15,7 +15,7 @@ export class CheckOrderService {
   @TaskLocal('*/10 * * * * *')
   async test() {
     const today = new Date();
-    const day = today.toLocaleDateString();
+    const day = today.toJSON().split('T')[0].split('-').join('/');
     const splash = this.average_seconds * 1000;
     console.log('splash :>> ', splash);
     const expiredTime = today.getTime() - splash;
