@@ -20,6 +20,7 @@ $ open http://localhost:7001/
 ```
 
 ### Deploy
+记得需要 `npm run build` or `yarn build`
 
 ```bash
 $ npm start
