@@ -23,6 +23,24 @@ http.interceptors.response.use(
   }
 );
 
+const fixPrice = (price: number): string => {
+  if (price > 100) {
+    return price.toFixed();
+  } else if (price > 10) {
+    return price.toFixed(1);
+  } else if (price > 1) {
+    return price.toFixed(2);
+  }
+  else if (price > 0.1) {
+    return price.toFixed(3);
+  }
+  else if (price > 0.001) {
+    return price.toFixed(4);
+  } else {
+    return price.toFixed(8);
+  }
+}
+
 const exchange = async function (id: string): Promise<any> {
   const option = {
     method: 'GET',
@@ -126,4 +144,4 @@ const CMC_queryPortfolio = async (cmc_jwt: string, portfolioSourceId: string, cr
 }
 
 
-export { exchange, currency, getAllCoins, CMC_queryAllPortfolio, CMC_queryStatistics, CMC_queryPortfolio };
+export { fixPrice, exchange, currency, getAllCoins, CMC_queryAllPortfolio, CMC_queryStatistics, CMC_queryPortfolio };

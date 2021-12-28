@@ -1,25 +1,9 @@
 import { Provide, TaskLocal, ALL, Config, Inject } from '@midwayjs/decorator';
 import { RedisService } from '@midwayjs/redis';
 import { sendMessage } from '../extend/telbot';
-import { CMC_queryPortfolio } from '../extend/cmc';
+import { fixPrice, CMC_queryPortfolio } from '../extend/cmc';
 
-const fixPrice = (price: number): string => {
-  if (price > 100) {
-    return price.toFixed();
-  } else if (price > 10) {
-    return price.toFixed(1);
-  } else if (price > 1) {
-    return price.toFixed(2);
-  }
-  else if (price > 0.1) {
-    return price.toFixed(3);
-  }
-  else if (price > 0.001) {
-    return price.toFixed(4);
-  } else {
-    return price.toFixed(8);
-  }
-}
+
 @Provide()
 export class taskPortfolioQueryDetail {
   @Inject()
