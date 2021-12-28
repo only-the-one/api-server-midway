@@ -28,7 +28,7 @@ export class taskPortfolioQueryDetail {
   @Config(ALL)
   config;
 
-  // 例如下面是每小时执行一次
+  // 例如下面是每1小时执行一次
   @TaskLocal('8 58 * * * *')
   async test() {
     const cmc_jwt = process.env.CMC_JWT;
@@ -43,6 +43,7 @@ export class taskPortfolioQueryDetail {
         _msg += `${item.symbol}: $${fixPrice(item.currentPrice)} ($${item.plValue.toFixed()}/${item.cryptoHoldings.toFixed()}) ${(item.plPercentValue*100).toFixed(2)}% \n`
       })
     }))
+    const msg = '小道消息 \n' + _msg;
     console.log(msg);
     await sendMessage(msg);
   }
