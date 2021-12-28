@@ -29,7 +29,7 @@ export class HomeController {
       const { portfolioSourceId } = _portfolio;
       const result = await CMC_queryPortfolio(cmc_jwt, portfolioSourceId);
       const { data } = result;
-      _msg += `\n================\n${_portfolio.portfolioName}】 $${_portfolio.totalAmount.toFixed()} \n================\n`
+      _msg += `\n================\n$【{_portfolio.portfolioName}】 $${_portfolio.totalAmount.toFixed()} \n================\n`
       data[0].list.filter(p => p.cryptoHoldings > 50).sort((b, a) => a.holdingsPercent - b.holdingsPercent).map((item, i) => {
         _msg += `${item.symbol}: $${fixPrice(item.currentPrice)} ($${item.plValue.toFixed()}/${item.cryptoHoldings.toFixed()}) ${(item.plPercentValue*100).toFixed(2)}% \n`
       })
