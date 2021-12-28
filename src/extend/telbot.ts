@@ -18,7 +18,6 @@ const sendMessage = async function (text: string): Promise<any> {
       text,
     },
   };
-  console.log('options :>> ', options);
   return await http.request(options);
 };
 

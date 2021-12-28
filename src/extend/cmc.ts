@@ -77,4 +77,53 @@ const getAllCoins = async function ({ start, limit }): Promise<any> {
   return data;
 };
 
-export { exchange, currency, getAllCoins };
+const CMC_queryAllPortfolio = async (cmc_jwt: string) => {
+  const option = {
+    url: 'https://api.coinmarketcap.com/asset/v3/portfolio/group/queryAll',
+    method: 'POST',
+    headers: {
+      authorization: 'Bearer ' + cmc_jwt,
+    },
+    data: {},
+  };
+  const { data } = await axios.request(option);
+  return data;
+};
+
+const CMC_queryStatistics = async (cmc_jwt: string, portfolioSourceId: string, cryptoUnit=2781, fiatUnit=2781) => {
+  const option = {
+    url: 'https://api.coinmarketcap.com/asset/v3/portfolio/queryStatistics',
+    method: 'POST',
+    headers: {
+      authorization: 'Bearer ' + cmc_jwt,
+    },
+    data: {
+      portfolioSourceId,
+      cryptoUnit,
+      fiatUnit
+    },
+  };
+  const { data } = await axios.request(option);
+  return data;
+}
+
+const CMC_queryPortfolio = async (cmc_jwt: string, portfolioSourceId: string, cryptoUnit=2781, currentPage=1, pageSize=1000) => {
+  const option = {
+    url: 'https://api.coinmarketcap.com/asset/v3/portfolio/query',
+    method: 'POST',
+    headers: {
+      authorization: 'Bearer ' + cmc_jwt,
+    },
+    data: {
+      portfolioSourceId,
+      cryptoUnit,
+      currentPage,
+      pageSize,
+    },
+  };
+  const { data } = await axios.request(option);
+  return data;
+}
+
+
+export { exchange, currency, getAllCoins, CMC_queryAllPortfolio, CMC_queryStatistics, CMC_queryPortfolio };
