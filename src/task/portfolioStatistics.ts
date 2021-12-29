@@ -13,8 +13,9 @@ export class taskPortfolioQueryStatistics {
   // 例如下面是每5分钟执行一次
   @TaskLocal('3 */5 * * * *')
   async test() {
-    return
-    console.log('CMC_queryStatistics start ==>', new Date());
+    if(process.env.TASK_QUERY_STATISTICS !== 'true') {
+      return;
+    }
     const cmc_jwt = process.env.CMC_JWT;
     const cmc_all_portfolio: any[] = JSON.parse(await this.redisService.get('cmc_portfolio'));
     let _msg = '';
@@ -27,8 +28,7 @@ export class taskPortfolioQueryStatistics {
           _msg += `${item.symbol}: ${item.holdings.toFixed()} \n`
       })
     }))
-    const msg = '小道消息 \n' + _msg;
-    console.log(msg);
+    const msg = '小道统计 \n' + _msg;
     await sendMessage(msg);
   }
 }

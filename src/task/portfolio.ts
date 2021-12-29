@@ -13,6 +13,9 @@ export class taskPortfolioQueryAll {
   // 例如下面是每3分钟执行一次
   @TaskLocal('5 */3 * * * *')
   async test() {
+    if(process.env.TASK_QUERY_ALL !== 'true') {
+      return;
+    }
     const cmc_jwt = process.env.CMC_JWT;
     const result = await CMC_queryAllPortfolio(cmc_jwt);
     await this.redisService.set('cmc_portfolio', JSON.stringify(result.data));
