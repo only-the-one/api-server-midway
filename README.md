@@ -34,16 +34,4 @@ $ npm stop
 [midway]: https://midwayjs.org
 
 
-----
-
-目标功能
-
-页面：增加要追踪的目标
-
-资产
-
-计算总资产？
-
-
-计算成本
 
